@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 #include <regex>
-#include <chrono>
-#include <thread>
 
 using namespace std;
 
@@ -29,8 +27,9 @@ main()
         if (currentIVs == "exit") exit(0);
         if (!regex_match(currentIVs, re))
         {
-            cout << "Input doesn't match the format!" << endl << endl;
-            this_thread::sleep_for(2s);
+            cout << "Input doesn't match the format!" << endl;
+            cout << "press ENTER to continue" << endl;
+            while(getchar() != '\n');
             continue;
         }
         istringstream iss(currentIVs);
@@ -52,12 +51,13 @@ main()
         }
         if (perfectIVcount != 3)
         {
-            cout << "Invalid perfect IV amount!" << endl << endl;
+            cout << "Invalid perfect IV amount!" << endl;
             errorFlag = true;
         }
         if (errorFlag) 
         {
-            this_thread::sleep_for(2s);
+            cout << "press ENTER to continue" << endl;
+            while(getchar() != '\n');
             continue;
         }
         for (int i = 0; i < 6; i++) // check validity
@@ -83,15 +83,16 @@ main()
             {
                 cout << " " << ((currentPerfectIVs[i] == 1) ? "31" : "X");
             }
-            cout << endl << endl;
+            cout << endl;
         } else if (skipAmount < 2)
         {
-            cout << "Invalid IVs: rerolls end before reaching last non-perfect IV stat. Last roll happens on " << statNames[lastReroll] << endl << endl;
+            cout << "Invalid IVs: rerolls end before reaching last non-perfect IV stat. Last roll happens on " << statNames[lastReroll] << endl;
         } else
         {
-            cout << "Invalid IVs: can't determine 4th perfect IV from the current IVs" << endl << endl;
+            cout << "Invalid IVs: can't determine 4th perfect IV from the current IVs" << endl;
         }
-        this_thread::sleep_for(2s);
+        cout << "press ENTER to continue" << endl;
+        while(getchar() != '\n');
     }
 }
 
